@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block BootstrapVersion %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Find a Ride to join</h1><br/>
+    <table class="table table-dark">
+        <tr>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Ride Type</th>
+            <th>No of Free seats left</th>
+            <th>Time of Departure</th>
+            <th>Name</th>
+            <th>Phone No</th>
+            <th>Actions</th>
+        </tr>
+        {% for ride in rides %}
+        <tr>
+            <td>{{ ride.source }}</td>
+            <td>{{ ride.dest }}</td>
+            <td>{{ ride.ride_type }}</td>
+            <td>{{ ride.free_seats }}</td>
+            <td>{{ ride.departure }}</td>
+            <td>{{ ride.name }}</td>
+            <td>{{ ride.ph_no }}</td>
+            <td><a href="/deleteRide/{{ride.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

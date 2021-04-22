@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+
+  flask:
+    build: ./FSC_MVP
+    container_name: pes_ride_flask
+    restart: always
+    environment:
+      - APP_NAME=MyFlaskApp2
+    expose:
+      - 8080
+
+  nginx:
+    build: ./nginx
+    container_name: nginx2
+    restart: always
+    ports:
+      - "80:80"
