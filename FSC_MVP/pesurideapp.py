@@ -55,5 +55,22 @@ def delRide(id):
     except:
         return 'There was problem deleting that ride'
 
+@app.route('/updateRide/<int:id>', methods= ['GET', 'POST'])
+def updateRide(id):
+    ride = Rides.query.get_or_404(id)
+    
+    if request.method == 'POST':
+        ride.ride_type = request.form['type']
+        ride.free_seats= request.form['seats']
+        ride.departure = datetime.strptime(request.form['dept'], r'%Y-%m-%dT%H:%M')
+
+        try:
+            db.session.commit()
+            return redirect('/findRide')
+        except:
+            return 'There was problem updating that ride'
+    else:
+        return render_template('updateRide.html', ride=ride)
+
 if __name__ == "__main__":
     app.run('0.0.0.0')
